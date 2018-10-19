@@ -1,2 +1,3 @@
-python-twitter
+twitter
+termcolor
 python-decouple
