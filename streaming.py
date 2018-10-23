@@ -15,7 +15,7 @@ api = twitter.Api(consumer_key=consumer_key,
     sleep_on_rate_limit=True)
 
 # User Timeline
-user = "ideoforms"
+user = "twitter"
 # print(api.VerifyCredentials())
 # statuses = api.GetUserTimeline(screen_name='elfarqy')
 # for f in statuses:
