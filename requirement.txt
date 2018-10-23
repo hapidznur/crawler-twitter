@@ -1,3 +1,4 @@
 twitter
-termcolor
 python-decouple
+elasticsearch
+pyarango
