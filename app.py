@@ -6,4 +6,4 @@ class Crawler:
         return streaming.user_timeline(user)
 
 crawler = Crawler()
-print(crawler.get_timeline('elfarqy'))
+print(crawler.get_timeline('twitter'))
