@@ -1,4 +1,4 @@
-twitter
+python-twitter
 python-decouple
 elasticsearch
 pyarango

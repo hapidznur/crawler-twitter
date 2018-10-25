@@ -86,11 +86,10 @@ def get_search(text):
             mongo_add(replies)
 
 def stream():
-    print(datetime.datetime.now())
     logging.basicConfig(filename="stream.log", level=logging.INFO)
     text = ['Pembakaran Bendara', 'Banser', 'MUI', 'Tauhid', 'Laskar Tauhid']
     logging.info("crawling on: %s" % datetime.datetime.now())
-    output = '%s' % datetime.datetime.now() 
+    output = './../%s.txt' % datetime.datetime.now().timestamp()
 
     with open(output, 'a') as f:
         # api.GetStreamFilter will return a generator that yields one status
@@ -98,4 +97,3 @@ def stream():
         for line in api.GetStreamFilter(track=text, filter_level='low'):
             f.write(json.dumps(line))
             f.write('\n')
-                
