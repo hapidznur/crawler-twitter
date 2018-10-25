@@ -1,0 +1,6 @@
+pylinter
+twitter
+python-decouple
+elasticsearch
+pyarango
+pytest
