@@ -1,9 +1,9 @@
 import streaming
+import model
+import json
+import datetime
+import logging
 
-class Crawler:
+print(datetime.datetime.now())
 
-    def get_timeline(self, user):     
-        return streaming.user_timeline(user)
-
-crawler = Crawler()
-print(crawler.get_timeline('twitter'))
+streaming.stream()
