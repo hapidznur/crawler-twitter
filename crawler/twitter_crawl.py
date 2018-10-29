@@ -89,7 +89,7 @@ def stream():
     logging.basicConfig(filename="./../logs/stream.log", level=logging.INFO)
     text = ['Pembakaran Bendara', 'Banser', 'MUI', 'Tauhid', 'Laskar Tauhid']
     logging.info("crawling on: %s" % datetime.datetime.now())
-    output = './../%s.txt' % datetime.datetime.now().timestamp()
+    output = './data-twitter/%s.txt' % datetime.datetime.now().timestamp()
 
     with open(output, 'a') as f:
         # api.GetStreamFilter will return a generator that yields one status
