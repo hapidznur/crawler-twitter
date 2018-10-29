@@ -29,6 +29,7 @@ def get_tweets(filename):
         yield twitter.Status.NewFromJsonDict(json.loads(line))
 
 def get_replies(tweet):
+    logging.basicConfig(filename="./../logs/replies.log", level=logging.INFO)
     user = tweet.user.screen_name
     tweet_id = tweet.id
     max_id = None
@@ -71,7 +72,6 @@ def get_search(text):
             data['retweeted_id_tweet'] = result.retweeted_status.id_str
             data['tweet_created'] = time.strftime('%Y-%m-%d %H:%M:%S', time.strptime(result.retweeted_status.created_at,'%a %b %d %H:%M:%S +0000 %Y'))
             # get_replies(result)
-            logging.basicConfig(filename="replies.log", level=logging.INFO)
             mongo_add(data)
             replies = {}
             for reply in get_replies(result.retweeted_status):
@@ -86,7 +86,7 @@ def get_search(text):
             mongo_add(replies)
 
 def stream():
-    logging.basicConfig(filename="stream.log", level=logging.INFO)
+    logging.basicConfig(filename="./../logs/stream.log", level=logging.INFO)
     text = ['Pembakaran Bendara', 'Banser', 'MUI', 'Tauhid', 'Laskar Tauhid']
     logging.info("crawling on: %s" % datetime.datetime.now())
     output = './../%s.txt' % datetime.datetime.now().timestamp()
