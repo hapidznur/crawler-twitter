@@ -89,11 +89,23 @@ def stream():
     logging.basicConfig(filename="./logs/stream.log", level=logging.INFO)
     text = ['Pembakaran Bendara', 'Banser', 'MUI', 'Tauhid', 'Laskar Tauhid']
     logging.info("crawling on: %s" % datetime.datetime.now())
-    output = './..//data-twitter/%s.txt' % datetime.datetime.now().timestamp()
+    output = './../data-twitter/%s.txt' % datetime.datetime.now().timestamp()
 
     with open(output, 'a') as f:
         # api.GetStreamFilter will return a generator that yields one status
         # message (i.e., Tweet) at a time as a JSON dictionary.
         for line in api.GetStreamFilter(track=text, filter_level='low'):
             f.write(json.dumps(line))
+            f.write('\n')
+
+def trends_location(woeid =  None):
+    if woeid == None:
+        woeid = config('Indonesia')
+        
+    output = './../data-twitter/trends-%s-%s.txt' % (woeid, datetime.datetime.now().timestamp())   
+    
+    with open(output, 'a') as f:
+        for line in api.GetTrendsWoeid(woeid):
+            # class dict object to json
+            f.write(json.dumps(line.__dict__))
             f.write('\n')
