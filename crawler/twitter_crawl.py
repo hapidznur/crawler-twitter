@@ -29,7 +29,7 @@ def get_tweets(filename):
         yield twitter.Status.NewFromJsonDict(json.loads(line))
 
 def get_replies(tweet):
-    logging.basicConfig(filename="./../logs/replies.log", level=logging.INFO)
+    logging.basicConfig(filename="./logs/replies.log", level=logging.INFO)
     user = tweet.user.screen_name
     tweet_id = tweet.id
     max_id = None
@@ -86,10 +86,10 @@ def get_search(text):
             mongo_add(replies)
 
 def stream():
-    logging.basicConfig(filename="./../logs/stream.log", level=logging.INFO)
+    logging.basicConfig(filename="./logs/stream.log", level=logging.INFO)
     text = ['Pembakaran Bendara', 'Banser', 'MUI', 'Tauhid', 'Laskar Tauhid']
     logging.info("crawling on: %s" % datetime.datetime.now())
-    output = './data-twitter/%s.txt' % datetime.datetime.now().timestamp()
+    output = './..//data-twitter/%s.txt' % datetime.datetime.now().timestamp()
 
     with open(output, 'a') as f:
         # api.GetStreamFilter will return a generator that yields one status
