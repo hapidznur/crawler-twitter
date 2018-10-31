@@ -78,6 +78,10 @@ target/
 # celery beat schedule file
 celerybeat-schedule
 
+# other 
+logs/
+testsdata/
+
 # SageMath parsed files
 *.sage.py
 
