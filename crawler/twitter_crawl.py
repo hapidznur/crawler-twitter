@@ -98,7 +98,7 @@ def get_search(text):
                 replies['in_reply_to_user_id'] = reply.in_reply_to_user_id
                 replies['in_reply_to_screen_name'] = reply.in_reply_to_screen_name
                 replies['type'] = 'replies'
-            m.mongo_add(replies, 'twitter')
+            m.mongo_add(replies, 'twitter_replies')
 
 def stream():
     logging.basicConfig(filename="./logs/stream.log", level=logging.INFO)
