@@ -114,11 +114,11 @@ def stream():
         str_parse = json.dumps(line)
         tweet = twitter.Status.NewFromJsonDict(json.loads(str_parse))
         status['id_str'] = tweet.id_str
-        if hasattr(tweet, 'full_text'):
+        if tweet.full_text != None:
             status['text'] =  tweet.full_text               
         else:
             status['text'] =  tweet.text
-        
+            # print(tweet)
         status['created_at'] = tweet.created_at
         status['user_name'] = tweet.user.screen_name
         status['user_id'] = tweet.user.id
