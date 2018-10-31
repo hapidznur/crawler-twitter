@@ -1,27 +1,30 @@
 from __future__ import unicode_literals, print_function
 import unittest
 import json
-import twitter
+from crawler.model import MongoModel 
 
-def test_streaming_extended_tweet():
-    with open('testdata/get_replies.json') as f:
-        tweets = f.readlines()
+class testModel(unittest.TestCase):
     
-    for tweet in tweets:
-        twitter.Status.NewFromJsonDict(json.loads(tweet))
+    def test_insert_into_mongo(self):
+        client = MongoModel('test', 'test')
+        data = {'test': 'test_insert'}
+        client.mongo_add(data)
 
+    def test_count_word_from_documents(self):
+        """get input from list of document
+        output object dict like word with total
+        example :
+        input = ["lorem ipsum we", "we want something new"]
+        output = {'lorem': 1, "ipsum" : 1, 'we':2}
 
-    assert isinstance(tweet, twitter.Status)
-    assert tweet.text == "HIV_AIDS_BiojQuery Mobile Web Development Essentials, Second Edition: https://t.co/r78h6xfAby Quantum AI Big/Small/… https://t.co/ZPJrpMvcZG"
-    assert tweet.truncated
-    assert tweet.full_text == 'HIV_AIDS_BiojQuery Mobile Web Development Essentials, Second Edition: https://t.co/r78h6xfAby Quantum AI Big/Small/0 Data Cloud/Fog Computing OutLook from ClouData &amp; Multiverse -  https://t.co/cnCBNJvu6T'
+        """
 
+        input = ["lorem ipsum we", "we want something new"]
+        utils = Utils()
+        data = utils.count_words(input)
+        print(data)
+        self.assertEqual(data['lorem'], 1)
 
-def test_streaming_extended_tweet_media():
-    with open('testdata/streaming/lines.json') as f:
-        tweets = f.readlines()
-
-    for tweet in tweets:
-        status = twitter.Status.NewFromJsonDict(json.loads(tweet))
-        assert isinstance(status, twitter.Status)
-        assert status.full_text
+    
+if __name__ == '__main__':
+    unittest.main()
