@@ -130,7 +130,7 @@ def stream():
         for reply in get_replies(tweet):
             replies = {}
             replies['created_at'] = reply.created_at
-            replies['id_tweet'] = reply.id_str
+            replies['id_str'] = reply.id_str
             replies['user_name'] = reply.user.name
             replies['user_username'] = reply.user.screen_name
             replies['text'] = reply.full_text
