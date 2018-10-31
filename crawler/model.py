@@ -3,23 +3,30 @@ import pprint
 import logging
 client = MongoClient()
 client = MongoClient('localhost', 27017)
+DATABASE = 'PUSTU'
+db =  client.DATABASE
 
-db = client.pustu
-def mongo_add(_data):
-    try:
-        tweets = db.pustu
-        post_id = tweets.insert_one(_data).inserted_id
-    except ValueError:
-        print(ValueError)
+class MongoModel():
+    def __init__(self):
+        pass
 
-def mongo_read(_limit=10):
-    try:
-        tweets =  db.pustu
-        data = tweets.find().limit(_limit)
-    except ValueError:
-        logging.error(ValueError)
+    def mongo_add(self, _data, _collection):
+        try:
+            tweets = db['%s' % _collection]  
+            post_id = tweets.insert_one(_data).inserted_id
+        
+        except ValueError:
+            print(ValueError)
 
-    return data
+    def mongo_read(self, _limit = 10, _collection =  None):
+        try:
+            tweets = db['%s' % _collection]  
+            data = tweets.find().limit(_limit)
+        except ValueError:
+            logging.error(ValueError)
+
+        return data
+
 # from pyArango.connection import *
 # conn = Connection(username="root", password="RANDOM")
 # b = conn.createDatabase(name="twitter")
