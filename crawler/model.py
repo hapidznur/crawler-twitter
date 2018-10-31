@@ -18,7 +18,15 @@ class MongoModel():
         except ValueError:
             print(ValueError)
 
-    def mongo_read(self, _limit = 10, _collection =  None):
+    def mongo_insert_replies(self, _data, _collection):
+        try:
+            tweets = db['%s' % _collection]  
+            post_id = tweets.insert_one(_data).inserted_id
+        
+        except ValueError:
+            print(ValueError)
+
+    def mongo_twitter(self, _limit = 10, _collection =  None):
         try:
             tweets = db['%s' % _collection]  
             data = tweets.find().limit(_limit)
@@ -26,6 +34,23 @@ class MongoModel():
             logging.error(ValueError)
 
         return data
+
+    def mongo_replies(self, _limit = 10, _collection =  None):
+        try:
+            tweets = db['%s' % _collection]  
+            data = tweets.find().limit(_limit)
+        except ValueError:
+            logging.error(ValueError)
+
+        return data
+
+if __name__ == '__main__':
+    ex = MongoModel()
+    test = {'test1': 'test'}
+    ex.mongo_insert_replies(test, 'test1')
+    ex.mongo_insert_replies(test, 'test2')
+ 
+
 
 # from pyArango.connection import *
 # conn = Connection(username="root", password="RANDOM")

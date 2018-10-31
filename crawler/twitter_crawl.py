@@ -98,7 +98,7 @@ def get_search(text):
                 replies['in_reply_to_user_id'] = reply.in_reply_to_user_id
                 replies['in_reply_to_screen_name'] = reply.in_reply_to_screen_name
                 replies['type'] = 'replies'
-            m.mongo_add(replies, 'twitter_replies')
+            m.mongo_insert_replies(replies, 'twitter_replies')
 
 def stream():
     logging.basicConfig(filename="./logs/stream.log", level=logging.INFO)
@@ -109,7 +109,7 @@ def stream():
     # api.GetStreamFilter will return a generator that yields one status
     # message (i.e., Tweet) at a time as a JSON dictionary.
     
-    for line in auth.GetStreamFilter(track=text, filter_level='low'):
+    for line in api.GetStreamFilter(track=text, filter_level='low'):
         status = {}
         str_parse = json.dumps(line)
         tweet = twitter.Status.NewFromJsonDict(json.loads(str_parse))
@@ -118,7 +118,7 @@ def stream():
             status['text'] =  tweet.full_text               
         else:
             status['text'] =  tweet.text
-            # print(tweet)
+
         status['created_at'] = tweet.created_at
         status['user_name'] = tweet.user.screen_name
         status['user_id'] = tweet.user.id
@@ -138,7 +138,7 @@ def stream():
             replies['in_reply_to_status_id_str'] = reply.in_reply_to_user_id
             replies['in_reply_to_screen_name'] = reply.in_reply_to_screen_name
             replies['type'] = 'replies'
-            m.mongo_add(replies, 'twitter')
+            m.mongo_insert_replies(replies, 'twitter_replies')
 
 def trends_location(woeid =  None):
     if woeid == None:
