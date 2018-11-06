@@ -120,8 +120,9 @@ def stream():
             status['text'] =  tweet.text
 
         status['created_at'] = tweet.created_at
-        status['user_name'] = tweet.user.screen_name
-        status['user_id'] = tweet.user.id
+        status['username'] = tweet.user.screen_name
+        status['name'] = tweet.user.nameS
+        status['id_twitter'] = tweet.user.id
         status['retweet_count'] = tweet.retweet_count
         status['favorite_count'] = tweet.favorite_count
         logging.basicConfig(filename="./logs/stream.log", level=logging.INFO)
@@ -131,10 +132,10 @@ def stream():
             replies = {}
             replies['created_at'] = reply.created_at
             replies['id_str'] = reply.id_str
-            replies['user_name'] = reply.user.name
-            replies['user_username'] = reply.user.screen_name
+            replies['name'] = reply.user.name
+            replies['username'] = reply.user.screen_name
             replies['text'] = reply.full_text
-            replies['user_id'] = reply.user.id
+            replies['id_twitter'] = reply.user.id
             replies['in_reply_to_status_id_str'] = reply.in_reply_to_user_id
             replies['in_reply_to_screen_name'] = reply.in_reply_to_screen_name
             replies['type'] = 'replies'
