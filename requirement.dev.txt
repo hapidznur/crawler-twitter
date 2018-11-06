@@ -3,6 +3,7 @@ requests
 requests_oauthlib
 responses
 
+pylint
 pytest
 pytest-cov
 pytest-runner
@@ -23,3 +24,4 @@ python-twitter
 python-decouple
 elasticsearch
 pyarango
+pymongo
