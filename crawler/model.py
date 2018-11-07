@@ -44,13 +44,14 @@ class MongoModel():
 
         return data
 
-if __name__ == '__main__':
-    ex = MongoModel()
-    test = {'test1': 'test'}
-    ex.mongo_insert_replies(test, 'test1')
-    ex.mongo_insert_replies(test, 'test2')
- 
+    def get_one(self, query, _collection = None):
+        try:
+            tweets = db['%s' % _collection]
+            data = tweets.find_one(query)
+        except ValueError:
+            logging.error(ValueError)
 
+        return data
 
 # from pyArango.connection import *
 # conn = Connection(username="root", password="RANDOM")

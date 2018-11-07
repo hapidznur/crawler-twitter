@@ -64,6 +64,7 @@ def get_replies(tweet):
                 # recursive magic to also get the replies to this reply
                 for reply_to_reply in get_replies(reply):
                     yield reply_to_reply
+                    
             max_id = reply.id
         if len(replies) != 100:
             break
@@ -121,13 +122,14 @@ def stream():
 
         status['created_at'] = tweet.created_at
         status['username'] = tweet.user.screen_name
-        status['name'] = tweet.user.nameS
+        status['name'] = tweet.user.name
         status['id_twitter'] = tweet.user.id
         status['retweet_count'] = tweet.retweet_count
         status['favorite_count'] = tweet.favorite_count
         logging.basicConfig(filename="./logs/stream.log", level=logging.INFO)
         logging.info("crawling replies on: %s" % tweet.id)
         m.mongo_add(status, 'twitter')
+        print(tweet)
         for reply in get_replies(tweet):
             replies = {}
             replies['created_at'] = reply.created_at
@@ -140,6 +142,7 @@ def stream():
             replies['in_reply_to_screen_name'] = reply.in_reply_to_screen_name
             replies['type'] = 'replies'
             m.mongo_insert_replies(replies, 'twitter_replies')
+            print(reply)
 
 def trends_location(woeid =  None):
     if woeid == None:
